@@ -130,6 +130,7 @@ ggsave(filename=file.path(picDir, paste0("plotHiCContactRanges_",sampleName,".pd
 
 ## Histogram of insert size
 allvalidpairs <- list.files(path=hicDir, pattern=paste0("^[[:print:]]*\\.validPairs$"), full.names=TRUE)
+allvalidpairs <- allvalidpairs[!file.size(allvalidpairs) == 0]
 stats_per_validpairs<- lapply(allvalidpairs, read.csv, sep="\t", as.is=TRUE, header=FALSE, row.names=1, nrow=100000)
 lv <- sapply(stats_per_validpairs, "[", 7)
 lv <- lapply(lv, function(x){as.numeric(x[which(x!="None" & ! is.na(x))])})
